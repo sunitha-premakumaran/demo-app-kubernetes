@@ -1,0 +1,4 @@
+./node_modules/
+./dist/
+azure-pipelines*.yml
+.editorconfig

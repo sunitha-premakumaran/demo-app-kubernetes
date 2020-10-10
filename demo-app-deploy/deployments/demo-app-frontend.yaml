@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: demo-app-frontend
+    labels:
+      tier: frontend
+spec:
+  template:
+      metadata:
+        name: demo-app-frontend
+        labels:
+            tier: frontend
+      spec:
+        containers:
+            - name: frontend
+              image: suni4596/todo-web:latest
+              ports:
+                  - containerPort: 4200
+              resources:
+                limits:
+                  memory: "100Mi"
+                  cpu: "100m"
+                requests:
+                  memory: "50Mi"
+                  cpu: "50m"
+  selector:
+      matchLabels:
+        tier: frontend

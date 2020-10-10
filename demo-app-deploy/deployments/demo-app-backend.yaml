@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: demo-app-backend
+    labels:
+      tier: backend
+spec:
+  template:
+      metadata:
+        name: demo-app-backend
+        labels:
+            tier: backend
+      spec:
+        containers:
+            - name: backend
+              image: suni4596/todo-server:backend
+              ports:
+                  - containerPort: 4000
+              env:
+                - name: DB_HOST
+                  value: db-service.default.svc.cluster.local
+              imagePullPolicy: Always
+              resources:
+                limits:
+                  memory: "100Mi"
+                  cpu: "100m"
+                requests:
+                  memory: "50Mi"
+                  cpu: "50m"
+  selector:
+      matchLabels:
+        tier: backend

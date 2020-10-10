@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: demo-app-database
+    labels:
+      tier: database
+spec:
+  template:
+      metadata:
+        name: demo-app-database
+        labels:
+            tier: database
+      spec:
+        containers:
+            - name: psql-app
+              image:  postgres
+              ports:
+                  - containerPort: 5432
+              env:
+                  - name: POSTGRES_USER
+                    value: postgres
+                  - name: POSTGRES_PASSWORD
+                    value: root
+                  - name: POSTGRES_DB
+                    value: todo_db
+              resources:
+                limits:
+                  memory: "100Mi"
+                  cpu: "100m"
+                requests:
+                  memory: "50Mi"
+                  cpu: "50m"
+  selector:
+      matchLabels:
+        tier: database

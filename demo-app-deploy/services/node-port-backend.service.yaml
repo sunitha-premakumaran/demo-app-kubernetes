@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  labels:
+      tier: backend-service
+spec:
+  type: NodePort
+  ports:
+      - nodePort: 30004
+        port: 80
+        targetPort: 4000
+  selector:
+      tier: backend
