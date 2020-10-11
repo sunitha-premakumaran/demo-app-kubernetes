@@ -16,13 +16,11 @@ spec:
               image:  postgres
               ports:
                   - containerPort: 5432
-              env:
-                  - name: POSTGRES_USER
-                    value: postgres
-                  - name: POSTGRES_PASSWORD
-                    value: root
-                  - name: POSTGRES_DB
-                    value: todo_db
+              envFrom:
+                  - configMapRef:
+                        name: psql-configmap
+                  - secretRef:
+                        name: psql-secret
               resources:
                 limits:
                   memory: "100Mi"

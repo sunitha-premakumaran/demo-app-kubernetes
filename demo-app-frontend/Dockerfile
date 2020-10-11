@@ -10,17 +10,15 @@ RUN apt-get update \
 
 WORKDIR ${WORK_DIR}
 
-# COPY package*.json ${WORK_DIR}
+COPY package*.json ${WORK_DIR}
 
-# RUN npm install
+RUN npm install
 
 COPY ./ ${WORK_DIR}
 
 #RUN npm run test -- --browsers ChromeHeadlessNoSandbox --watch=false
 
 ARG configuration
-
-RUN npm install
 
 RUN npm run build -- --output-path=./dist/out --configuration $configuration
 
